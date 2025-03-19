@@ -12,20 +12,22 @@ A modular automated token sniper for the Monad testnet. This application automat
 
 ## Installation
 
-1. Clone the repository:
+1. Register [Nad.fun](https://testnet.nad.fun/ref/LsI3ty)
+
+2. Clone the repository:
 
    ```bash
    git clone https://github.com/WINGFO-HQ/Nadfun-Snipe.git
    cd Nadfun-Snipe
    ```
 
-2. Install dependencies:
+3. Install dependencies:
 
    ```bash
    npm install
    ```
 
-3. Edit `private.key` file in the root directory with your wallet's private key.
+4. Edit `private.key` file in the root directory with your wallet's private key.
 
 ## Configuration
 
