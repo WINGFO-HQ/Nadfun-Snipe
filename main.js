@@ -42,11 +42,7 @@ async function main() {
       logger.info(
         `You have ${existingTokens.length} tokens from previous sessions`
       );
-      logger.info(`Checking price conditions for existing tokens...`);
-      await tokenTrader.checkAndSellByPrice();
     }
-
-    let cycleCount = 0;
 
     logger.info("Starting token sniper loop...");
 
@@ -73,16 +69,6 @@ async function main() {
         }
       } catch (error) {
         logger.error(`Error in main loop: ${error.message}`);
-      }
-
-      cycleCount++;
-
-      if (cycleCount % config.PRICE_CHECK_INTERVAL === 0) {
-        try {
-          await tokenTrader.checkAndSellByPrice();
-        } catch (err) {
-          logger.error(`Error checking prices: ${err.message}`);
-        }
       }
 
       await tokenTrader.delay(config.MONITOR_DELAY);

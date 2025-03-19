@@ -159,69 +159,6 @@ class TokenTrader {
     }
   }
 
-  async checkAndSellByPrice() {
-    if (!this.signerAddress) {
-      this.signerAddress = await this.signer.getAddress();
-    }
-
-    const tokensBought = this.tokenStorage.getByWalletAddress(
-      this.signerAddress
-    );
-
-    if (tokensBought.length === 0) return;
-
-    for (const record of tokensBought) {
-      try {
-        const tokenPriceData = await this.tokenScanner.getTokenPrice(
-          record.contract_address
-        );
-
-        if (!tokenPriceData) {
-          const currentTime = Math.floor(Date.now() / 1000);
-          const timeSincePurchase = currentTime - record.bought_at;
-
-          if (timeSincePurchase > 3600) {
-            logger.warn(
-              `${
-                record.symbol || record.contract_address
-              } held for 1+ hour with no price data.`
-            );
-          }
-          continue;
-        }
-
-        let currentPrice = 0;
-        if (typeof tokenPriceData.price === "string") {
-          currentPrice = parseFloat(tokenPriceData.price);
-        } else {
-          currentPrice = tokenPriceData.price;
-        }
-
-        const boughtPrice = parseFloat(record.bought_at_price);
-        const profitThreshold = boughtPrice * (1 + config.TAKE_PROFIT / 100);
-        const lossThreshold = boughtPrice * (1 - config.STOP_LOSS / 100);
-
-        if (currentPrice >= profitThreshold) {
-          logger.success(
-            `${record.symbol || "Token"} reached TP (${
-              config.TAKE_PROFIT
-            }%). Current: ${currentPrice}, Bought: ${boughtPrice}`
-          );
-          await this.sellToken(record.contract_address);
-        } else if (currentPrice <= lossThreshold) {
-          logger.warn(
-            `${record.symbol || "Token"} reached SL (${
-              config.STOP_LOSS
-            }%). Current: ${currentPrice}, Bought: ${boughtPrice}`
-          );
-          await this.sellToken(record.contract_address);
-        }
-      } catch (err) {
-        logger.error(`Error checking price for ${record.contract_address}`);
-      }
-    }
-  }
-
   async delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }

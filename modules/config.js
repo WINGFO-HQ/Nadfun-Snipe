@@ -26,8 +26,6 @@ const api = {
 };
 
 const trading = {
-  TAKE_PROFIT: 20,
-  STOP_LOSS: 15,
   DEFAULT_PURCHASE_AMOUNT: ethers.utils.parseUnits("0.5", "ether"),
   DEFAULT_FEE_PERCENT: 1,
   TX_DEADLINE_HOURS: 6,
@@ -35,7 +33,6 @@ const trading = {
 
 const monitoring = {
   MONITOR_DELAY: 5000,
-  PRICE_CHECK_INTERVAL: 2,
   MAX_TOKEN_AGE: 5,
 };
 
@@ -51,14 +48,11 @@ module.exports = {
   paths,
   api,
 
-  TAKE_PROFIT: trading.TAKE_PROFIT,
-  STOP_LOSS: trading.STOP_LOSS,
   DEFAULT_PURCHASE_AMOUNT: trading.DEFAULT_PURCHASE_AMOUNT,
   DEFAULT_FEE_PERCENT: trading.DEFAULT_FEE_PERCENT,
   TX_DEADLINE_HOURS: trading.TX_DEADLINE_HOURS,
 
   MONITOR_DELAY: monitoring.MONITOR_DELAY,
-  PRICE_CHECK_INTERVAL: monitoring.PRICE_CHECK_INTERVAL,
   MAX_TOKEN_AGE: monitoring.MAX_TOKEN_AGE,
 
   trading,

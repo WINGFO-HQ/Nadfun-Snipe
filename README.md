@@ -6,7 +6,6 @@ A modular automated token sniper for the Monad testnet. This application automat
 
 - **Automatic Token Detection**: Monitors the Monad testnet for newly launched tokens
 - **Instant Buying**: Automatically purchases new tokens with configurable amounts
-- **Take Profit & Stop Loss**: Implements automatic selling based on price movements
 - **Modular Design**: Clean code architecture for easy maintenance and extensibility
 - **Error Handling**: Robust error handling for API and network issues
 - **Transaction Management**: Handles gas pricing and transaction submissions
@@ -32,12 +31,6 @@ A modular automated token sniper for the Monad testnet. This application automat
 
 All configuration settings are in `modules/config.js`:
 
-- **Trading Parameters**:
-
-  - `TAKE_PROFIT`: Percentage gain for automatic selling (default: 10%)
-  - `STOP_LOSS`: Percentage loss for automatic selling (default: 10%)
-  - `DEFAULT_PURCHASE_AMOUNT`: Amount to spend per token (default: 1 MON)
-
 - **Monitoring Parameters**:
 
   - `MONITOR_DELAY`: Time between checks for new tokens (default: 5 seconds)
@@ -61,7 +54,6 @@ The application will:
 1. Load your wallet from the private key
 2. Start monitoring for new token launches
 3. Automatically purchase new tokens as they are detected
-4. Monitor token prices and sell according to your take profit/stop loss settings
 
 ## Project Structure
 
@@ -90,15 +82,6 @@ Edit `DEFAULT_PURCHASE_AMOUNT` in `config.js`:
 
 ```javascript
 DEFAULT_PURCHASE_AMOUNT: ethers.utils.parseUnits("0.5", "ether"), // 0.5 MON
-```
-
-### Modifying Take Profit/Stop Loss
-
-Adjust `TAKE_PROFIT` and `STOP_LOSS` in `config.js`:
-
-```javascript
-TAKE_PROFIT: 20, // 20%
-STOP_LOSS: 15, // 15%
 ```
 
 ## Debugging
